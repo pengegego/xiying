@@ -200,7 +200,20 @@ async function handleClothingList(url, env) {
   // 分类筛选
   const catSid = url.searchParams.get('category');
   if (catSid) {
-    filters.push(`category=in.(${catSid})`);
+    // 查出该分类及其所有子分类的 sid
+    const sub = await supaFetch(env, `xys_clothingctgy?select=sid&or=(sid.eq.${catSid},parent.eq.${catSid})`);
+    const subData = await sub.json();
+    const catById = await supaOne(env, 'xys_clothingctgy', 'id', parseInt(catSid, 10));
+    const allSids = new Set(subData.map(r => r.sid));
+    if (catById) allSids.add(catById.sid);
+    // 也查通过 parent=id 关联的子分类
+    const byPid = await supaFetch(env, `xys_clothingctgy?select=sid&parent=eq.${catById?.id || 0}`);
+    const pidData = await byPid.json();
+    pidData.forEach(r => allSids.add(r.sid));
+
+    if (allSids.size > 0) {
+      filters.push(`category=in.(${[...allSids].join(',')})`);
+    }
   }
 
   // 编码筛选
