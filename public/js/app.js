@@ -60,6 +60,33 @@ async function loadCategories() {
 
     categoryTree.innerHTML = html;
     bindCategoryEvents();
+
+    // 也填充手机端的下拉框
+    const mobileSelect = document.getElementById('mobileCategory');
+    if (mobileSelect) {
+      // 保留"全部"选项
+      mobileSelect.innerHTML = '<option value="">全部服装</option>';
+      for (const cat of categories) {
+        // 父分类
+        mobileSelect.innerHTML += `<option value="${cat.id}">├ ${esc(cat.name)}</option>`;
+        if (cat.children) {
+          for (const child of cat.children) {
+            mobileSelect.innerHTML += `<option value="${child.id}">&nbsp;&nbsp;├ ${esc(child.name)}</option>`;
+          }
+        }
+      }
+      mobileSelect.addEventListener('change', () => {
+        state.currentCategory = mobileSelect.value;
+        state.page = 1;
+        // 同步侧边栏高亮
+        document.querySelectorAll('.cat-all, .cat-label, .cat-child').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.cat-parent').forEach(el => el.classList.remove('active-root'));
+        if (!mobileSelect.value) {
+          document.querySelector('.cat-all')?.classList.add('active');
+        }
+        loadClothing();
+      });
+    }
   } catch (err) {
     console.error('加载分类失败:', err);
   }
