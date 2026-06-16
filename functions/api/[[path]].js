@@ -32,6 +32,17 @@ export async function onRequest(context) {
     //   路由分发
     // ============================================
 
+    // GET /api/debug — 调试环境变量
+    if (path === '/api/debug') {
+      return json({
+        has_key: !!env.SUPA_ANON_KEY,
+        key_len: (env.SUPA_ANON_KEY || '').length,
+        key_prefix: (env.SUPA_ANON_KEY || '').substring(0, 10),
+        has_r2: !!env.R2_BASE_URL,
+        r2_val: env.R2_BASE_URL
+      });
+    }
+
     // GET /api/categories
     if (path === '/api/categories') {
       const data = await supaSelect(env, 'xys_clothingctgy', { select: '*', order: 'sort,parent' });
@@ -74,8 +85,8 @@ export async function onRequest(context) {
 //   Supabase REST API 请求
 // ============================================
 const baseHeaders = (env) => ({
-  'apikey': env.SUPA_ANON_KEY,
-  'Authorization': `Bearer ${env.SUPA_ANON_KEY}`
+  'apikey': env.SUPA_ANON_KEY || 'eyJhbG...i-54',
+  'Authorization': `Bearer ${env.SUPA_ANON_KEY || 'eyJhbG...i-54'}`
 });
 
 async function supaFetch(env, path, extraHeaders = {}) {

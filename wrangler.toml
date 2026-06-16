@@ -1,0 +1,6 @@
+name = "xiying"
+main = "src/index.js"
+compatibility_date = "2025-04-01"
+
+[env.production]
+vars = { SUPA_ANON_KEY = "", R2_BASE_URL = "" }
