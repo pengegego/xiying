@@ -46,7 +46,7 @@ export async function onRequest(context) {
     // GET /api/categories
     if (path === '/api/categories') {
       const data = await supaSelect(env, 'xys_clothingctgy', { select: '*', order: 'sort,parent' });
-      return json(buildCategoryTree(data));
+      return json(buildCategoryTree(data.data));
     }
 
     // GET /api/clothing
