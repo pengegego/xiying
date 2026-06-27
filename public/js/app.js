@@ -256,8 +256,8 @@ async function showDetail(id) {
               <th>部件</th>
               <th>库房</th>
               <th class="num">数量</th>
-              <th class="num">售价</th>
               <th class="num">租价</th>
+              <th class="num">售价</th>
             </tr>
           </thead>
           <tbody>
@@ -268,8 +268,8 @@ async function showDetail(id) {
                 <td>${esc(s.parts_name || '—')}</td>
                 <td>${esc(s.position_name || esc(s.position) || '—')}</td>
                 <td class="num">${s.quantity || 0}</td>
-                <td class="num">${s.price ? '¥' + Number(s.price).toFixed(2) : '—'}</td>
                 <td class="num">${s.zuprice ? '¥' + Number(s.zuprice).toFixed(2) : '—'}</td>
+                <td class="num">${s.price ? '¥' + Number(s.price).toFixed(2) : '—'}</td>
               </tr>
             `).join('')}
           </tbody>
