@@ -2,6 +2,20 @@
  * Cloudflare Pages Function - API 入口
  * 处理所有 /api/* 请求
  */
+
+// ---- 库房位置映射 ----
+const AREA_MAP = {
+  '1': 'A奉天店',
+  '2': 'B库房一楼',
+  '3': 'C库房一楼',
+  '4': 'D库房二楼',
+  '5': 'E库房二楼',
+  '6': 'F洗衣房',
+  '7': 'AD奉天店大厅',
+  '8': 'AV奉天店VIP',
+  '9': '定制'
+};
+
 export async function onRequest(context) {
   const { request, env } = context;
   const url = new URL(request.url);
@@ -279,7 +293,8 @@ async function handleClothingDetail(id, env) {
     item.stockList.push({
       ...s,
       size_name: await sizeName(env, s.size),
-      parts_name: await partsName(env, s.partsid)
+      parts_name: await partsName(env, s.partsid),
+      position_name: AREA_MAP[s.position] || s.position || ''
     });
   }
 
