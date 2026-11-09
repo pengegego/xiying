@@ -5,9 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>玺赢</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/splash.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- ========== 开屏轮播 ========== -->
+  <div id="splash" class="splash" aria-label="开屏展示">
+    <div class="splash-track" id="splashTrack">
+      <div class="splash-slide"><img class="splash-bg" src="/splash/splash-01.jpg" aria-hidden="true"><img class="splash-fg" src="/splash/splash-01.jpg" alt="玺赢"></div>
+      <div class="splash-slide"><img class="splash-bg" src="/splash/splash-02.jpg" aria-hidden="true"><img class="splash-fg" src="/splash/splash-02.jpg" alt="玺赢"></div>
+      <div class="splash-slide"><img class="splash-bg" src="/splash/splash-03.jpg" aria-hidden="true"><img class="splash-fg" src="/splash/splash-03.jpg" alt="玺赢"></div>
+      <div class="splash-slide"><img class="splash-bg" src="/splash/splash-04.jpg" aria-hidden="true"><img class="splash-fg" src="/splash/splash-04.jpg" alt="玺赢"></div>
+      <div class="splash-slide"><img class="splash-bg" src="/splash/splash-05.jpg" aria-hidden="true"><img class="splash-fg" src="/splash/splash-05.jpg" alt="玺赢"></div>
+      <div class="splash-slide"><img class="splash-bg" src="/splash/splash-06.jpg" aria-hidden="true"><img class="splash-fg" src="/splash/splash-06.jpg" alt="玺赢"></div>
+      <div class="splash-slide"><img class="splash-bg" src="/splash/splash-07.jpg" aria-hidden="true"><img class="splash-fg" src="/splash/splash-07.jpg" alt="玺赢"></div>
+      <div class="splash-slide"><img class="splash-bg" src="/splash/splash-08.jpg" aria-hidden="true"><img class="splash-fg" src="/splash/splash-08.jpg" alt="玺赢"></div>
+      <div class="splash-slide"><img class="splash-bg" src="/splash/splash-09.jpg" aria-hidden="true"><img class="splash-fg" src="/splash/splash-09.jpg" alt="玺赢"></div>
+    </div>
+
+    <button class="splash-close" id="splashClose" aria-label="关闭">✕</button>
+    <button class="splash-arrow prev" id="splashPrev" aria-label="上一张">‹</button>
+    <button class="splash-arrow next" id="splashNext" aria-label="下一张">›</button>
+
+    <div class="splash-bottom">
+      <div class="splash-dots" id="splashDots"></div>
+      <button class="splash-enter" id="splashEnter">进入官网 ›</button>
+    </div>
+  </div>
+
   <div id="app">
     <!-- ========== 顶部导航 ========== -->
     <header class="header">
@@ -99,6 +124,7 @@
     </div>
   </div>
 
+  <script src="/js/splash.js"></script>
   <script src="/js/app.js"></script>
 </body>
 </html>
